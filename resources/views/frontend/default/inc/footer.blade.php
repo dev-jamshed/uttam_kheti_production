@@ -1,9 +1,9 @@
-{{-- <div class="footer-curve position-relative overflow-hidden">
+<div class="footer-curve position-relative overflow-hidden">
     <span class="position-absolute section-curve-wrapper top-0 h-100"
         data-background="{{ staticAsset('frontend/default/assets/img/shapes/section-curve.png') }}"></span>
-</div> --}}
+</div>
 
-<footer class="gshop-footer position-relative pt-8  z-1 overflow-hidden">
+<footer class="gshop-footer position-relative pt-8  z-1 overflow-hidden px-md-5">
     @include('frontend.default.inc.footerBgImages.' . getTheme())
     <div class="container">
         <div class="row justify-content-center">

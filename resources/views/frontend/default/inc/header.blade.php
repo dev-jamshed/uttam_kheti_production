@@ -430,7 +430,7 @@
                                         <span
                                             class="cart-counter badge bg-primary rounded-circle p-0 {{ count($carts) > 0 ? '' : 'd-none' }}">{{ count($carts) }}</span>       
                                     </button>
-                                    <span class="amount-span sub-total-price">   {{ formatPrice(getSubTotal($carts, false)) }} </span> 
+                                    <span class="amount-span sub-total-price"> {{ formatPrice(getSubTotal($carts, false)) }} </span> 
                                 </div>
                                 <div class="cart-box-wrapper">
                                     <div class="apt_cart_box theme-scrollbar">

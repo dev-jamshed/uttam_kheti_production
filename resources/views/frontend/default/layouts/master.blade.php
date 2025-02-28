@@ -60,10 +60,10 @@
     <meta property="fb:app_id" content="{{ env('FACEBOOK_PIXEL_ID') }}">
 @endif
 
+<a class="ca_whatsapp" target="_blank" href="https://wa.me/{{ getSetting('navbar_contact_number') }}">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
 
-    <a class="ca_whatsapp" href="#">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
 
     <!-- head-scripts -->
     @include('frontend.default.inc.head-scripts')
@@ -109,6 +109,14 @@
         <img src="{{ staticAsset('frontend/default/assets/img/preloader.gif') }}" alt="preloader" class="img-fluid" max-width="180">
     </div> --}}
     <!--preloader end-->
+
+      
+    <div id="preloader" class="bg-light-subtle">
+        <div class="preloader-wrap">
+            <img src="{{ uploadedAsset(getSetting('navbar_logo')) }}" class="img-fluid" max-width="180">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
 
     <!--main content wrapper start-->
     @php
@@ -161,7 +169,7 @@
 
     <!--scroll bottom to top button start-->
     <button class="scroll-top-btn">
-        <i class="fa-regular fa-hand-pointer"></i></button>
+        <i class="fa-duotone fa-solid fa-arrow-up"></i></button>
         <!--scroll bottom to top button end-->
 
         <!--build:js-->

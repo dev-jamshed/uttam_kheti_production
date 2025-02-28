@@ -3,7 +3,8 @@
         class="position-absolute leaf-shape z--1 rounded-circle d-none d-lg-inline">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/mango.png') }}" alt="mango"
         class="position-absolute mango z--1" data-parallax='{"y": -120}'>
-
+    <video src="{{asset('frontend/default/assets/bg_videos/vegitables_bg.mp4')}}" muted autoplay loop class="home_hero_bg"></video>
+        
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/hero-circle-sm.png') }}" alt="circle"
         class="position-absolute hero-circle circle-sm z--1 d-none d-md-inline">
 
@@ -11,8 +12,16 @@
 
         <div class="home-hero-container">
 
+
+            
             <h2 class="home-hero-heading">Order Vegitables fruits & groceries. Discover
-                best deals. Uttam kheti it!</h2>
+                best deals. Uttam kheti it! </h2>
+
+                {{-- @foreach ($sliders as $slider)
+                <h2 class="home-hero-heading">{{ $slider->title }}</h2>
+                <p class="mb-5 fs-6">{{ $slider->text }}</p>
+            @endforeach --}}
+
 
             {{-- // Filter --}}
             <div class="search-location-container">
@@ -157,7 +166,7 @@
                 @endforeach
 
             </div>
-        </div> --}}
+        </div>  
 
     </div>
     {{-- @if (getSetting('facebook_link') || getSetting('twitter_link') || getSetting('linkedin_link') || getSetting('youtube_link'))

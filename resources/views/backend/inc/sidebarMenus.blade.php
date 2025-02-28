@@ -171,7 +171,7 @@
 
 
     <!-- Refunds -->
-    @php
+    {{-- @php
         $refundsActiveRoutes = [
             'admin.refund.configurations',
             'admin.refund.requests',
@@ -219,11 +219,11 @@
                 </ul>
             </div>
         </li>
-    @endcan
+    @endcan --}}
 
 
     <!-- Rewards & Wallet -->
-    @php
+    {{-- @php
         $rewardsActiveRoutes = [
             'admin.rewards.configurations',
             'admin.rewards.setPoints',
@@ -263,7 +263,7 @@
                 </ul>
             </div>
         </li>
-    @endcan
+    @endcan --}}
 
     <!-- Users -->
     <li class="side-nav-title side-nav-item nav-item mt-3">
@@ -332,12 +332,12 @@
                         </li>
                     @endcan
 
-                    @can('deliveryman_payment_history')
+                    {{-- @can('deliveryman_payment_history')
                         <li class="{{ areActiveRoutes(['admin.deliverymen.payout.history'], 'tt-menu-item-active') }}">
                             <a
                                 href="{{ route('admin.deliverymen.payout.history') }}">{{ localize('Payout Histories') }}</a>
                         </li>
-                    @endcan
+                    @endcan --}}
 
                     @can('deliveryman_config')
                         <li class="{{ areActiveRoutes(['admin.deliveryman.config'], 'tt-menu-item-active') }}">
@@ -345,19 +345,19 @@
                         </li>
                     @endcan
 
-                    @can('deliveryman_payroll_create')
+                    {{-- @can('deliveryman_payroll_create')
                         <li class="{{ areActiveRoutes(['admin.deliveryman.payroll'], 'tt-menu-item-active') }}">
                             <a href="{{ route('admin.deliveryman.payroll') }}">{{ localize('Deliveryman Payroll') }}</a>
                         </li>
-                    @endcan
+                    @endcan --}}
 
 
-                    @can('deliveryman_payroll_list')
+                    {{-- @can('deliveryman_payroll_list')
                         <li class="{{ areActiveRoutes(['admin.deliveryman.payroll.list'], 'tt-menu-item-active') }}">
                             <a
                                 href="{{ route('admin.deliveryman.payroll.list') }}">{{ localize('Deliveryman Payroll List') }}</a>
                         </li>
-                    @endcan
+                    @endcan --}}
 
 
                 </ul>

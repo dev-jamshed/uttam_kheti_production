@@ -17,43 +17,45 @@
 
           <!-- Swiper -->
           
-          <div class=" featured-product-slider-container ">
-              <div class="swiper featured-product-slider p-5">
-                <div class="swiper-wrapper">
-                    @php
-                    $featured_products_right =
-                        getSetting('featured_products_right') != null
-                            ? json_decode(getSetting('featured_products_right'))
-                            : [];
-                    $right_products = \App\Models\Product::query()
-                        ->isPublished()
-                        ->whereIn('id', $featured_products_right)
-                        ->get();
-                @endphp
-            
-                @foreach ($right_products as $product)
-                    <div class="swiper-slide">
-                        <div class="{{ !$loop->last ? 'mb-3' : '' }}">
-                            @include('frontend.default.pages.partials.products.horizontal-product-card', [
-                                'product' => $product,
-                                'bgClass' => 'bg-white',
-                            ])
+          <div class="container">
+              <div class=" featured-product-slider-container ">
+                  <div class="swiper featured-product-slider p-5">
+                    <div class="swiper-wrapper">
+                        @php
+                        $featured_products_right =
+                            getSetting('featured_products_right') != null
+                                ? json_decode(getSetting('featured_products_right'))
+                                : [];
+                        $right_products = \App\Models\Product::query()
+                            ->isPublished()
+                            ->whereIn('id', $featured_products_right)
+                            ->get();
+                    @endphp
+                
+                    @foreach ($right_products as $product)
+                        <div class="swiper-slide">
+                            <div class="{{ !$loop->last ? 'mb-3' : '' }}">
+                                @include('frontend.default.pages.partials.products.horizontal-product-card', [
+                                    'product' => $product,
+                                    'bgClass' => 'bg-white',
+                                ])
+                            </div>
                         </div>
+                    @endforeach  
+                      
+                      {{-- <div class="swiper-slide">Slide 7</div>
+                      <div class="swiper-slide">Slide 8</div>
+                      <div class="swiper-slide">Slide 9</div> --}}
                     </div>
-                @endforeach  
-                  
-                  {{-- <div class="swiper-slide">Slide 7</div>
-                  <div class="swiper-slide">Slide 8</div>
-                  <div class="swiper-slide">Slide 9</div> --}}
+    
                 </div>
+                
+                <div class="featured-swiper-button-next"> <i class="fa-duotone fa-solid fa-arrow-right"></i> </div>
+                <div class="featured-swiper-button-prev"> <i class="fa-duotone fa-solid fa-arrow-left"></i> </div>
+              
+              </div>
 
-            </div>
-            
-            <div class="featured-swiper-button-next"> <i class="fa-duotone fa-solid fa-arrow-right"></i> </div>
-            <div class="featured-swiper-button-prev"> <i class="fa-duotone fa-solid fa-arrow-left"></i> </div>
-          
           </div>
- 
             {{-- <div class="row g-4 justify-content-center"> --}}
                 
                 <!-- left column -->
@@ -140,3 +142,4 @@
 
  
 </section>
+

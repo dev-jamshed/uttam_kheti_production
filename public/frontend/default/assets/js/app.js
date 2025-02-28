@@ -129,7 +129,9 @@ jQuery(function ($) {
         },
       
     });
-    FeaturedProductSlider();
+
+    // FeaturedProductSlider();
+    
     let gShopHeroSlider = new Swiper(".gshop-hero-slider", {
         slidesPerView: 1,
         autoplay: {
@@ -147,6 +149,8 @@ jQuery(function ($) {
             clickable: true,
         },
     });
+
+
     let gshopFeedbackControl = new Swiper(".gshop-feedback-thumb-slider", {
         slidesPerView: 5,
         loop: true,

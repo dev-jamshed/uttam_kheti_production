@@ -3,7 +3,8 @@
 }
 
 .c-bg-linear-gradient-primary {
-    background: linear-gradient(0deg, #04EA3D, #15A739) !important;
+    /* background: linear-gradient(0deg, #04EA3D, #15A739) !important; */
+    background: transparent;
 }
 
 
@@ -386,8 +387,9 @@ html:not([dir="rtl"]) .toast-close-button {
 }
 .amount-span{
     position: relative;
-    top: 3px;
+    top: 4px;
     left: 5px;
+    font-weight: 600;
 }
 
 
@@ -695,7 +697,7 @@ html:not([dir="rtl"]) .toast-close-button {
 }
 
 .featured-product-slider-container{
-    max-width: 80%;
+    max-width: 90%;
     margin: 20px auto;
     /* position: relative; */
 }
@@ -730,5 +732,60 @@ html:not([dir="rtl"]) .toast-close-button {
 .featured-swiper-button-prev{
     left:  9.5%;
 }
+.home_hero_bg{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+    z-index: -1;
+}
 
- 
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 999999;
+}
+#preloader .loading-bar {
+    width: 100%;
+    height: 3px;
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+    background: #f9fafb;
+}
+#preloader .loading-bar:before {
+    content: "";
+    width: 35px;
+    height: 3px;
+    background: #4eb529;
+    position: absolute;
+    left: -34px;
+    -webkit-animation: bluebar 1.5s infinite ease;
+    animation: bluebar 1.5s infinite ease;
+}
+@-webkit-keyframes bluebar {
+    50% {
+        left: 96px;
+    }
+}
+@keyframes bluebar {
+    50% {
+        left: 96px;
+    }
+}

@@ -50,6 +50,7 @@ class CampaignsController extends Controller
     # campaign store
     public function store(Request $request)
     {
+        // return $request;
         $campaign = new Campaign;
         $campaign->title = $request->title;
         $campaign->banner = $request->banner;
@@ -64,6 +65,9 @@ class CampaignsController extends Controller
         $campaign->end_date   = strtotime($date_var[1]);
 
         $campaign->slug = strtolower(Str::slug($request->title) . '-' . Str::random(5));
+        $campaign->discount = $request->discount;
+        $campaign->discount_type = $request->discount_type;
+
 
         if ($campaign->save()) {
             if ($request->product_ids) {
@@ -82,7 +86,7 @@ class CampaignsController extends Controller
                     $root_product->save();
                 }
             }
- 
+
             $campaign->themes()->sync($request->theme_ids);
             flash(localize('Campaign has been saved successfully'))->success();
             return redirect()->route('admin.campaigns.index');
@@ -115,6 +119,8 @@ class CampaignsController extends Controller
         $campaign->end_date   = strtotime($date_var[1]);
         $campaign->title = $request->title;
         $campaign->banner = $request->banner;
+        $campaign->discount = $request->discount;
+        $campaign->discount_type = $request->discount_type;
 
         $campaign->campaignProducts()->delete();
 
@@ -134,7 +140,7 @@ class CampaignsController extends Controller
                     $root_product->save();
                 }
             }
-            
+
             $campaign->themes()->sync($request->theme_ids);
             flash(localize('Campaign has been updated successfully'))->success();
             return redirect()->route('admin.campaigns.index');
@@ -158,8 +164,12 @@ class CampaignsController extends Controller
     # discount
     public function productDiscount(Request $request)
     {
+
         $product_ids = $request->product_ids;
-        return view('backend.pages.campaigns.campaign_discount', compact('product_ids'));
+        $discount = $request->discount;
+        $discount_type = $request->discount_type;
+
+        return view('backend.pages.campaigns.campaign_discount', compact('product_ids', 'discount', 'discount_type'));
     }
 
     # discount update
@@ -167,15 +177,28 @@ class CampaignsController extends Controller
     {
         $product_ids = $request->product_ids;
         $campaign_id = $request->campaign_id;
-        return view('backend.pages.campaigns.campaign_discount_edit', compact('product_ids', 'campaign_id'));
+        $discount = $request->discount;
+        $discount_type = $request->discount_type;
+        return view('backend.pages.campaigns.campaign_discount_edit', compact('product_ids', 'campaign_id','discount', 'discount_type'));
     }
 
     # delete campaign
     public function delete($id)
     {
-        $campaign = Campaign::findOrFail($id); 
-        
-        CampaignTheme::where('coupon_id', $campaign->id)->delete();
+        $campaign = Campaign::findOrFail($id);
+
+        // Reset discount for products in the campaign
+        $campaignProducts = $campaign->campaignProducts;
+        foreach ($campaignProducts as $campaignProduct) {
+            $product = Product::findOrFail($campaignProduct->product_id);
+            $product->discount_value = 0;
+            $product->discount_type = null;
+            $product->discount_start_date = null;
+            $product->discount_end_date = null;
+            $product->save();
+        }
+
+        CampaignTheme::where('campaign_id', $campaign->id)->delete();
         $campaign->campaignProducts()->delete();
 
         $campaign->delete();

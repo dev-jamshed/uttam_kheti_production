@@ -36,14 +36,15 @@
                                         data-placeholder="{{ localize('Select themes') }}" data-toggle="select2" multiple
                                         required>
                                         @foreach ($themes as $theme)
-                                            <option value="{{ $theme->id }}" {{ in_array($theme->id, active_themes_array()) ? 'selected':'' }}>
+                                            <option value="{{ $theme->id }}"
+                                                {{ in_array($theme->id, active_themes_array()) ? 'selected' : '' }}>
                                                 {{ $theme->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="row mb-4">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="">
                                             <label for="title" class="form-label">{{ localize('Title') }}</label>
                                             <input class="form-control" type="text" id="title"
@@ -51,7 +52,33 @@
                                                 required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+
+                                    <div class="col-lg-4">
+                                        <div class="">
+                                            <label for="discount" class="form-label">{{ localize('Discount') }}</label>
+                                            <input class="form-control" type="number" id="discount"
+                                                placeholder="{{ localize('Discount') }}" name="discount"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="">
+                                            <label for="discount_type" class="form-label
+                                                ">{{ localize('Discount Type') }}</label>
+                                            <select class="form-control select2" name="discount_type" data-toggle="select2" id="discount_type"
+                                                required>
+                                                <option value="percent">{{ localize('Percent %') }}</option>
+                                                <option value="flat">{{ localize('Fixed') }}</option>         
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+
+
+
+
+                                    <div class="col-lg-4">
 
 
                                         <div class="">
@@ -183,14 +210,20 @@
         $(document).ready(function() {
             "use strict"
 
-            $('#campaign_products').on('change', function() {
+            function updateCampaignProducts() {
                 var product_ids = $('#campaign_products').val();
-                if (product_ids.length > 0) {
+                var discount = $('#discount').val();
+                var discount_type = $('#discount_type').val();
+                
+                if (product_ids.length > 0 && discount && discount_type) {
                     $.post('{{ route('admin.campaigns.productDiscount') }}', {
                         _token: '{{ csrf_token() }}',
-                        product_ids: product_ids
+                        product_ids: product_ids,
+                        discount: discount,
+                        discount_type: discount_type
                     }, function(data) {
                         $('#campaign_product_discount').html(data);
+                        console.log(data);
                         $('.tt-footable').footable();
                         setTimeout(() => {
                             $('.select2').select2();
@@ -199,7 +232,32 @@
                 } else {
                     $('#campaign_product_discount').html(null);
                 }
+            }
+
+            let alertShown = false;
+            let firstLoad = true;
+
+            $('#campaign_products').on('change', function() {
+                var discount = $('#discount').val();
+                var discount_type = $('#discount_type').val();
+                if (!discount || !discount_type) {
+                    if (!alertShown && !firstLoad) {
+                        alert('Please select discount and discount type before selecting products.');
+                        alertShown = true;
+                    }
+                    $('#campaign_products').val(null).trigger('change');
+                } else {
+                    alertShown = false;
+                    updateCampaignProducts();
+                }
+                firstLoad = false;
             });
+
+            $('#discount_type').on('change', updateCampaignProducts);
+            $('#discount').on('focusout', updateCampaignProducts);
+
+            // Ensure products are shown correctly when the page is opened
+            updateCampaignProducts();
         });
     </script>
 @endsection

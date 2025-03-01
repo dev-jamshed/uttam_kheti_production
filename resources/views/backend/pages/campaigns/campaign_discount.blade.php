@@ -16,14 +16,15 @@
             <span>{{ formatPrice($product->min_price) }}</span>
         </td>
         <td class="align-middle">
-            <input type="number" lang="en" name="discount_{{ $id }}"
-                value="{{ $product->discount_value }}" min="0" step="0.001" class="form-control" required>
+            <input type="number" lang="en" value="{{ isset($discount) ? $discount : $product->discount_value }}" min="0" step="0.001" class="form-control" required readonly>
+            <input type="hidden" name="discount_{{ $id }}" value="{{ isset($discount) ? $discount : $product->discount_value }}">
         </td>
         <td class="align-middle">
-            <select class="form-control select2" name="discount_type_{{ $id }}" data-toggle="select2">
-                <option value="percent">{{ localize('Percent %') }}</option>
-                <option value="flat">{{ localize('Fixed') }}</option>
+            <select disabled class="form-control select2" data-toggle="select2" readonly>
+                <option value="percent" {{ (isset($discount_type) ? $discount_type : $product->discount_type) == 'percent' ? 'selected' : '' }}>{{ localize('Percent %') }}</option>
+                <option value="flat" {{ (isset($discount_type) ? $discount_type : $product->discount_type) == 'flat' ? 'selected' : '' }}>{{ localize('Fixed') }}</option>
             </select>
+            <input type="hidden" name="discount_type_{{ $id }}" value="{{ isset($discount_type) ? $discount_type : $product->discount_type }}">
         </td>
     </tr>
 @endforeach

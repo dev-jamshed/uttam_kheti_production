@@ -58,6 +58,30 @@
                                                 value="{{ $campaign->title }}">
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="">
+                                            <label for="discount" class="form-label">{{ localize('Discount') }}</label>
+                                            <input class="form-control" type="number" id="discount"
+                                                placeholder="{{ localize('Discount') }}" name="discount"
+                                                value="{{ $campaign->discount }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="">
+                                            <label for="discount_type" class="form-label
+                                                ">{{ localize('Discount Type') }}</label>
+                                            <select class="form-control select2" name="discount_type" data-toggle="select2" id="discount_type"
+                                                required>
+                                                <option value="percent" {{ $campaign->discount_type == 'percent' ? 'selected' : '' }}>{{ localize('Percent %') }}</option>
+                                                <option value="flat" {{ $campaign->discount_type == 'flat' ? 'selected' : '' }}>{{ localize('Fixed') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+
+
                                     <div class="col-lg-6">
 
                                         @php
@@ -179,38 +203,55 @@
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
+            "use strict"
 
-            //for media files
-            getChosenFilesCount();
-            showSelectedFilePreviewOnLoad();
-
-            getOfferDiscount();
-
-            $('#campaign_products').on('change', function() {
-                getOfferDiscount();
-            });
-
-            function getOfferDiscount() {
+            function updateCampaignProducts() {
                 var product_ids = $('#campaign_products').val();
-                if (product_ids.length > 0) {
+                var discount = $('#discount').val();
+                var discount_type = $('#discount_type').val();
+                
+                if (product_ids.length > 0 && discount && discount_type) {
                     $.post('{{ route('admin.campaigns.productDiscountEdit') }}', {
                         _token: '{{ csrf_token() }}',
                         product_ids: product_ids,
+                        discount: discount,
+                        discount_type: discount_type,
                         campaign_id: {{ $campaign->id }}
                     }, function(data) {
                         $('#campaign_product_discount').html(data);
-                        $('.tt-footable').footable({
-                            on: {
-                                "ready.ft.table": function(e, ft) {
-                                    $('.select2').select2();
-                                },
-                            },
-                        });
+                        console.log(data);
+                        $('.tt-footable').footable();
+                        setTimeout(() => {
+                            $('.select2').select2();
+                        }, 500);
                     });
                 } else {
                     $('#campaign_product_discount').html(null);
                 }
             }
+
+            let alertShown = false;
+
+            $('#campaign_products').on('change', function() {
+                var discount = $('#discount').val();
+                var discount_type = $('#discount_type').val();
+                if (!discount || !discount_type) {
+                    if (!alertShown) {
+                        alert('Please select discount and discount type before selecting products.');
+                        alertShown = true;
+                    }
+                    $('#campaign_products').val(null).trigger('change');
+                } else {
+                    alertShown = false;
+                    updateCampaignProducts();
+                }
+            });
+
+            $('#discount_type').on('change', updateCampaignProducts);
+            $('#discount').on('input', updateCampaignProducts);
+
+            // Ensure products are shown correctly when the page is opened
+            updateCampaignProducts();
         });
     </script>
 @endsection

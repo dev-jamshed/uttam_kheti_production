@@ -41,20 +41,24 @@
                             <span>{{ formatPrice($product->min_price) }}</span>
                         </td>
                         <td>
-                            <input type="number" lang="en" name="discount_{{ $id }}"
-                                value="{{ $product->discount_value }}" min="0" step="0.001"
+                            <input readonly type="number" lang="en" name="discount_{{ $id }}"
+                                value="{{ $discount }}" min="0" step="0.001"
                                 class="form-control" required>
+                                {{-- <input type="hidden" name="discount_{{ $id }}" value="{{ $product->discount }}"> --}}
+
                         </td>
-                        <td>
-                            <select class="form-control select2" data-toggle="select2"
+                        <td >
+                            <select disabled class="form-control select2" data-toggle="select2"
                                 name="discount_type_{{ $id }}">
-                                <option value="percent" <?php if ($product->discount_type == 'percent') {
+                                <option value="percent" <?php if ($discount_type == 'percent') {
                                     echo 'selected';
                                 } ?>>{{ localize('Percent %') }}</option>
-                                <option value="flat" <?php if ($product->discount_type == 'flat') {
+                                <option value="flat" <?php if ($discount_type == 'flat') {
                                     echo 'selected';
                                 } ?>>{{ localize('Fixed') }}</option>
                             </select>
+
+                            <input type="hidden" name="discount_type_{{ $id }}" value="{{ $discount_type }}">
                         </td>
                     </tr>
                 @endforeach

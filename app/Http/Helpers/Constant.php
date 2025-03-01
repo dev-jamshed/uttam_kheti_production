@@ -743,13 +743,20 @@ if (!function_exists('discountPercentage')) {
     // return discount in %
     function discountPercentage($product)
     {
-        $discountPercentage = $product->discount_value;
+        $discountPercentage = 0;
+        $currentDate = strtotime(date('d-m-Y H:i:s'));
 
-        if ($product->discount_type != "percent") {
-            $price = productBasePrice($product);
-            $discountAmount = discountedProductBasePrice($product);
-            $discountValue = $price - $discountAmount;
-            $discountPercentage = ($discountValue * 100) / ($price > 0 ? $price : 1);
+        if ($product->discount_start_date != null && $product->discount_end_date != null) {
+            if ($currentDate >= $product->discount_start_date && $currentDate <= $product->discount_end_date) {
+                $discountPercentage = $product->discount_value;
+
+                if ($product->discount_type != "percent") {
+                    $price = productBasePrice($product);
+                    $discountAmount = discountedProductBasePrice($product);
+                    $discountValue = $price - $discountAmount;
+                    $discountPercentage = ($discountValue * 100) / ($price > 0 ? $price : 1);
+                }
+            }
         }
 
         return round($discountPercentage);

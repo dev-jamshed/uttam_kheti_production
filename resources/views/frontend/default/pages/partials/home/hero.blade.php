@@ -14,13 +14,13 @@
 
 
             
-            <h2 class="home-hero-heading">Order Vegitables fruits & groceries. Discover
-                best deals. Uttam kheti it! </h2>
+            {{-- <h2 class="home-hero-heading">Order Vegitables fruits & groceries. Discover
+                best deals. Uttam kheti it! </h2> --}}
 
-                {{-- @foreach ($sliders as $slider)
+                @foreach ($sliders as $slider)
                 <h2 class="home-hero-heading">{{ $slider->title }}</h2>
-                <p class="mb-5 fs-6">{{ $slider->text }}</p>
-            @endforeach --}}
+                {{-- <p class="mb-5 fs-6">{{ $slider->text }}</p> --}}
+            @endforeach
 
 
             {{-- // Filter --}}

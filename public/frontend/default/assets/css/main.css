@@ -44403,9 +44403,14 @@ body {
 }
 
 .mobile-toolbar-item {
-    padding: .5rem;
+    padding: 0.4rem;
     border-left: 1px solid #f4f4f4;
-    text-align: center
+    text-align: center;
+    /* display: flex; */!imp;!i;!;
+    padding-top: 13px;
+    /* align-items: center; */
+    justify-content: center;
+    align-content: center;
 }
 
 .mobile-toolbar-item:first-child {
@@ -44424,7 +44429,7 @@ body {
 .mobile-toolbar-label {
     display: block;
     color: #5d6374;
-    font-size: .75rem
+    font-size: 0.65rem;
 }
 
 @media(max-width: 991.98px) {
@@ -44525,8 +44530,8 @@ body {
 }
 
 .btn-md {
-    padding: 12px 20px;
-    font-size: 15px
+    padding: 10px 10px;
+    font-size: 10px;
 }
 
 .btn-outline {
@@ -45032,7 +45037,7 @@ body {
     }
 
     .horizontal-product-card.card-md .thumbnail {
-        width: 100%
+        width: 125px;
     }
 }
 
@@ -47300,10 +47305,13 @@ body {
 
 .gshop-filter-btn-group {
     
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+display: flex;
+    
+align-items: center;
+    
+justify-content: center;
+    
+margin-top: 0px !important;!i;!;
 }
 .gshop-filter-btn-group button {
     display: flex;
@@ -51372,5 +51380,8 @@ blockquote::before {
     background-repeat: no-repeat
 }
 
+.login_logo {
+    width: 150px;
+}
 /*# sourceMappingURL=scss */
 /*# sourceMappingURL=main.css.map */

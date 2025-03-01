@@ -1,5 +1,5 @@
 
-<div class="horizontal-product-card d-sm-flex align-items-center position-relative  bg-white   border card-md  ">
+<div class="horizontal-product-card d-flex align-items-center position-relative  bg-white   border card-md  ">
     
     @php
     $discountPercentage = discountPercentage($product);

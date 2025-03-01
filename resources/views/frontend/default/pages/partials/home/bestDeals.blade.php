@@ -51,7 +51,7 @@
                         @endphp
 
                         @foreach ($products as $product)
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-3 col-6">
                                 @include(
                                     'frontend.default.pages.partials.products.horizontal-product-card',
                                     [

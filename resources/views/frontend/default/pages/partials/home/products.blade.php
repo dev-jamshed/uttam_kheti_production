@@ -1,11 +1,11 @@
-<section class="pt-80 pb-100">
+<section class="pt-80 pb-100 duo_product">
     <div class="container">
         <div class="row justify-content-center justify-content-xl-between g-4">
             <div class="col-12">
-                <div class="row gy-4">
+                <div class="row gy-lg-4 gy-3">
                     
                     
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 " >
                         <div class="product-listing-box bg-white rounded-2">
 
                             <div class="d-flex align-items-center justify-content-between gap-3 mb-5 flex-wrap">
@@ -17,7 +17,7 @@
 
                             <div class="row">
                                 @foreach (\App\Models\Product::isPublished()->latest()->take(2)->get() as $product)
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-6 px-1">
                                         <div class="mb-3">
                                             @include(
                                                 'frontend.default.pages.partials.products.horizontal-product-card',
@@ -37,7 +37,7 @@
 
 
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 px-1">
                         <div class="product-listing-box bg-white rounded-2">
                             <div class="d-flex align-items-center justify-content-between gap-3 mb-5 flex-wrap">
                                 <h4 class="mb-0">{{ localize('Best Selling') }}</h4>
@@ -54,7 +54,7 @@
 
                         <div class="row">
                             @foreach ($products as $product)
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-6 px-1">
                                 <div class="mb-3">
                                     @include(
                                         'frontend.default.pages.partials.products.horizontal-product-card',

@@ -789,3 +789,7 @@ html:not([dir="rtl"]) .toast-close-button {
         left: 96px;
     }
 }
+
+#quickview_modal .modal-body {
+    border-radius: 20px;
+}

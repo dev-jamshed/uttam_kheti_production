@@ -1,6 +1,6 @@
-<section class="pb-120 position-relative z-1 pt-120">
+<section class="pb-120 position-relative z-1 pt-120 duo_product">
     <div class="container">
-        <div class="row g-4 align-items-center justify-content-center">
+        {{-- <div class="row g-4 align-items-center justify-content-center"> --}}
             {{-- <div class="col-xxl-4 col-xl-5 order-2 order-xxl-1 d-none d-xl-block d-none-1399">
                 <a href="{{ getSetting('best_deal_banner_link') }}">
                     <img src="{{ uploadedAsset(getSetting('best_deal_banner')) }}" alt="" class="img-fluid">
@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 <div class="mt-4">
-                    <div class="row g-4">
+                    <div class="row g-md-4 gy-md-4 gy-2">
                         
                         @php
                             $weekly_best_deals = getSetting('weekly_best_deals') != null ? json_decode(getSetting('weekly_best_deals')) : [];
@@ -51,7 +51,7 @@
                         @endphp
 
                         @foreach ($products as $product)
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-3 col-6 px-lg-2 px-1">
                                 @include(
                                     'frontend.default.pages.partials.products.horizontal-product-card',
                                     [
@@ -63,6 +63,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        {{-- </div> --}}
     </div>
 </section>

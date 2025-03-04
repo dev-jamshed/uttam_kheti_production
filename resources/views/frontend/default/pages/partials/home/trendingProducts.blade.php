@@ -61,7 +61,7 @@
 
             @foreach ($products as $product)
                 <div
-                    class=" col-lg-3 col-md-4 col-6
+                    class=" col-lg-3 col-md-4 col-6 px-lg-2 px-1 
                     @php
 if($product->categories()->count() > 0){ 
                             foreach ($product->categories as $category) {

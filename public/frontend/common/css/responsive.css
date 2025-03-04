@@ -337,16 +337,44 @@
     transition: all .3sease-in-out;
     font-size: 13px;
 }
+ 
+ 
+.duo_product .horizontal-product-card {
+ 
+ 
+  border-radius: 14px;
+  padding: 10px;
+   
+}
+
+.duo_product  .horizontal-product-card.card-md .thumbnail {
+  width: 110px;
+}
+.duo_product .horizontal-product-card .card-content .title {
+  font-size: 14px;
+}
+
+.duo_product .horizontal-product-card .card-content .pricing span.h4 {
+  font-size: 14px;
+}
+
+.duo_product .horizontal-product-card .product-radio-btn li label {
+  font-size: 8px;
+  padding: 4px 10px;
+}
+.duo_product .pricing {
+  margin-top: 8px !important;
+}
+.duo_product .cart-button {
+  padding: 3px 15px;
+  margin-top: 7px;
+  font-size: 11px !important;
+}
 
 
-
-
-
-
-
-
-
-
+.duo_product ul.product-radio-btn.d-flex.align-items-center.justify-content-center.gap-2.m-0 {
+  gap: 2px !important;
+}
 
 
 } /*-------- media end 786px -------*/

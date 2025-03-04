@@ -43530,7 +43530,7 @@ body {
 }
 
 .pt-120 {
-    padding-top: 120px
+    padding-top: 120px;
 }
 
 @media(max-width: 767.98px) {
@@ -43596,7 +43596,7 @@ body {
 }
 
 .pb-200 {
-    padding-bottom: 200px
+    padding-bottom: 150px;
 }
 
 @media(max-width: 767.98px) {

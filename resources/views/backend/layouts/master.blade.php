@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--favicon icon-->
-    <link rel="icon" href="{{ uploadedAsset(getSetting('favicon')) }}" type="image/png" sizes="16x16">
+    {{-- <link rel="icon" href="{{ uploadedAsset(getSetting('favicon')) }}" type="image/png" sizes="16x16"> --}}
+
+    <link rel="icon" href="{{ uploadedAsset(getSetting('navbar_logo')) }}"  type="image/png" sizes="16x16">
 
     <!--title-->
     <title>

@@ -185,9 +185,14 @@
     <div class="offcanvas-header border-bottom">
         <div class="tt-brand">
             <a href="index.html" class="tt-brand-link">
-                <img src="{{ uploadedAsset(getSetting('favicon')) }}" class="tt-brand-favicon ms-1"
+                {{-- <img src="{{ uploadedAsset(getSetting('favicon')) }}" class="tt-brand-favicon ms-1"
                     alt="favicon" />
-                <img src="{{ uploadedAsset(getSetting('admin_panel_logo')) }}" class="tt-brand-logo ms-2"
+               
+                    <img src="{{ uploadedAsset(getSetting('admin_panel_logo')) }}" class="tt-brand-logo ms-2"
+                    alt="logo" /> --}}
+  
+               
+                    <img src="{{ uploadedAsset(getSetting('navbar_logo')) }}" class="tt-brand-logo ms-2"
                     alt="logo" />
             </a>
         </div>

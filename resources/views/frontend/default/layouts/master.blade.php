@@ -26,7 +26,8 @@
     <meta name="keywords" content="{{ getSetting('global_meta_keywords') }}">
 
     <!--favicon icon-->
-    <link rel="icon" href="{{ uploadedAsset(getSetting('favicon')) }}" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{ uploadedAsset(getSetting('navbar_logo')) }}"  type="image/png" sizes="16x16">
+    {{-- <link rel="icon" href="{{ uploadedAsset(getSetting('favicon')) }}" type="image/png" sizes="16x16"> --}}
 
     <!--title-->
     <title>

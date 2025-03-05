@@ -12,16 +12,13 @@
 
         <div class="home-hero-container">
 
-
-            
             {{-- <h2 class="home-hero-heading">Order Vegitables fruits & groceries. Discover
                 best deals. Uttam kheti it! </h2> --}}
 
                 @foreach ($sliders as $slider)
                 <h2 class="home-hero-heading">{{ $slider->title }}</h2>
                 {{-- <p class="mb-5 fs-6">{{ $slider->text }}</p> --}}
-            @endforeach
-
+                @endforeach
 
             {{-- // Filter --}}
             <div class="search-location-container">
@@ -39,14 +36,12 @@
                         <button  class="search-icon-button"><i class="fa-regular fa-magnifying-glass"></i></button>
                     </div> --}}
 
-
                 <form class="search-input-container" action="{{ route('products.index') }}">
                     <input type="text" placeholder="{{ localize('Search products') }}" name="search"
                         @isset($searchKey) value="{{ $searchKey }}" @endisset>
                     <button type="submit" class="submit-icon-btn-secondary"><i
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
- 
 
             </div>
 
@@ -66,8 +61,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
@@ -79,7 +72,6 @@
                         </a>
                     </div>
                 </div>
-
 
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
@@ -93,7 +85,6 @@
                     </div>
                 </div>
 
-
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
@@ -106,8 +97,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
@@ -119,9 +108,6 @@
                         </a>
                     </div>
                 </div>
-
-
-
 
             </div>
         </div>

@@ -3,7 +3,7 @@
         class="position-absolute leaf-shape z--1 rounded-circle d-none d-lg-inline">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/mango.png') }}" alt="mango"
         class="position-absolute mango z--1" data-parallax='{"y": -120}'>
-    <video src="{{asset('frontend/default/assets/bg_videos/vegitables_bg.mp4')}}" muted autoplay loop class="home_hero_bg"></video>
+    <video src="{{asset('public/frontend/default/assets/bg_videos/vegitables_bg.mp4')}}" muted autoplay loop class="home_hero_bg"></video>
         
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/hero-circle-sm.png') }}" alt="circle"
         class="position-absolute hero-circle circle-sm z--1 d-none d-md-inline">

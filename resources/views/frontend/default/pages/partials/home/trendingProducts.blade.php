@@ -27,7 +27,7 @@
 
 
                     <button class="active" data-filter="*">
-                        <img src="{{ asset('frontend/default/assets/img/category_all_products.png') }}" alt=""
+                        <img src="{{ asset('public/frontend/default/assets/img/category_all_products.png') }}" alt=""
                             class="filter-category-img">
                         <span class="category_active_name">
                             {{ localize('All Products') }}

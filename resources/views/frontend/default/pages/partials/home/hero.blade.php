@@ -57,7 +57,7 @@
 
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
-                    <img src="{{ asset('frontend/default/assets/img/custom_images/1.png') }}" alt="">
+                    <img src="{{ asset('public/frontend/default/assets/img/custom_images/1.png') }}" alt="">
                     <h3>Deals</h3>
                     <div class="category-card-button-section">
                         <a href="#">
@@ -71,7 +71,7 @@
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
-                    <img src="{{ asset('frontend/default/assets/img/custom_images/2.png') }}" alt="">
+                    <img src="{{ asset('public/frontend/default/assets/img/custom_images/2.png') }}" alt="">
                     <h3>FRUITS</h3>
                     <div class="category-card-button-section">
                         <a href="#">
@@ -84,7 +84,7 @@
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
-                    <img src="{{ asset('frontend/default/assets/img/custom_images/3.png') }}" alt="">
+                    <img src="{{ asset('public/frontend/default/assets/img/custom_images/3.png') }}" alt="">
                     <h3>VEGETABLES</h3>
                     <div class="category-card-button-section">
                         <a href="#">
@@ -97,7 +97,7 @@
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
-                    <img src="{{ asset('frontend/default/assets/img/custom_images/4.png') }}" alt="">
+                    <img src="{{ asset('public/frontend/default/assets/img/custom_images/4.png') }}" alt="">
                     <h3>MART</h3>
                     <div class="category-card-button-section">
                         <a href="#">
@@ -111,7 +111,7 @@
                 <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
-                    <img src="{{ asset('frontend/default/assets/img/custom_images/5.png') }}" alt="">
+                    <img src="{{ asset('public/frontend/default/assets/img/custom_images/5.png') }}" alt="">
                     <h3>OFFERS</h3>
                     <div class="category-card-button-section">
                         <a href="#">

@@ -62,7 +62,7 @@
             <div class="category-main-container">
 
                 @forelse ($campaigns as $campaign)
-                <div class="c-category-card">
+                    <div class="c-category-card">
                      <span>EAT OUT & SAVE MORE</span>
                      <p>UP {{$campaign->discount}}{{$campaign->discount_type == 'percent' ? '%' : ''}} OFF</p>
                      

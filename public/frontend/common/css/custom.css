@@ -349,10 +349,7 @@ html:not([dir="rtl"]) .toast-close-button {
     z-index: 99999; 
  }
 
- .scroll-top-btn.active {
-    bottom: 65px;
-    left: 40px;
-}
+  
 .object-fit-cover{
     object-fit: cover;
 }
@@ -760,6 +757,10 @@ html:not([dir="rtl"]) .toast-close-button {
     justify-content: center;
     text-align: center;
     z-index: 999999;
+    background: #f7f5ef;
+}
+#preloader img{
+    width:500px
 }
 #preloader .loading-bar {
     width: 100%;

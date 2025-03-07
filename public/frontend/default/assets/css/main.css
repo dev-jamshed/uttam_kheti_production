@@ -44707,8 +44707,8 @@ body {
     color: #fff;
     border-radius: 4px;
     position: fixed;
-    bottom: 0;
-    right: 40px;
+       bottom: 65px;
+    left: 40px;
     z-index: 2;
     opacity: 0;
     visibility: hidden;

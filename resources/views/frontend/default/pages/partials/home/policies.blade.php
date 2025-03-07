@@ -13,7 +13,7 @@
                   
                     <div class="policy-card-content">
                         <h3>same day free  delivery </h3>
-                        <p>Lorem ipsum dolor</p>
+                        <p>Fast & free shipping on all orders. </p>
                     </div>
     
                 </div>
@@ -29,7 +29,7 @@
                   
                     <div class="policy-card-content">
                         <h3>Secuity Payment </h3>
-                        <p>Lorem ipsum dolor</p>
+                        <p>Safe & encrypted transactions.</p>
                     </div>
     
                 </div>
@@ -45,7 +45,7 @@
                   
                     <div class="policy-card-content">
                         <h3>same day return </h3>
-                        <p>Lorem ipsum dolor</p>
+                        <p>Quick & easy return policy.</p>
                     </div>
     
                 </div>
@@ -61,7 +61,7 @@
                   
                     <div class="policy-card-content">
                         <h3>24/7 Support </h3>
-                        <p>Lorem ipsum dolor</p>
+                        <p>Help is available anytime</p>
                     </div>
     
                 </div>

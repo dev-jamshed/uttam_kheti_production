@@ -3,8 +3,9 @@
         class="position-absolute leaf-shape z--1 rounded-circle d-none d-lg-inline">
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/mango.png') }}" alt="mango"
         class="position-absolute mango z--1" data-parallax='{"y": -120}'>
-    <video src="{{asset('public/frontend/default/assets/bg_videos/vegitables_bg.mp4')}}" muted autoplay loop class="home_hero_bg"></video>
-        
+    <video src="{{ asset('public/frontend/default/assets/bg_videos/vegitables_bg.mp4') }}" muted autoplay loop
+        class="home_hero_bg"></video>
+
     <img src="{{ staticAsset('frontend/default/assets/img/shapes/hero-circle-sm.png') }}" alt="circle"
         class="position-absolute hero-circle circle-sm z--1 d-none d-md-inline">
 
@@ -15,19 +16,19 @@
             {{-- <h2 class="home-hero-heading">Order Vegitables fruits & groceries. Discover
                 best deals. Uttam kheti it! </h2> --}}
 
-                @foreach ($sliders as $slider)
+            @foreach ($sliders as $slider)
                 <h2 class="home-hero-heading">{{ $slider->title }}</h2>
                 {{-- <p class="mb-5 fs-6">{{ $slider->text }}</p> --}}
-                @endforeach
+            @endforeach
 
             {{-- // Filter --}}
             <div class="search-location-container">
 
                 {{-- // location --}}
-                <div class="location-input-container">
+                {{-- <div class="location-input-container">
                     <button class="location-icon-button"><i class="fa-regular fa-location-dot"></i></button>
                     <input type="text" placeholder="DHA Phase 5">
-                </div>
+                </div> --}}
 
                 {{-- //Search --}}
 
@@ -45,23 +46,42 @@
 
             </div>
 
+
+
+
+            @php
+                $campaigns = \App\Models\Campaign::where('end_date', '>=', strtotime(date('Y-m-d')))
+                    ->where('is_published', 1)
+                    ->latest()
+                    ->get();
+            @endphp
+
+           
+
             {{-- // Categories --}}
             <div class="category-main-container">
 
+                @forelse ($campaigns as $campaign)
                 <div class="c-category-card">
-
-                    <span>EAT OUT & SAVE MORE</span>
-                    <p>UP 30% OFF</p>
-                    <img src="{{ asset('public/frontend/default/assets/img/custom_images/1.png') }}" alt="">
-                    <h3>Deals</h3>
-                    <div class="category-card-button-section">
-                        <a href="#">
-                            <i class="fa-solid fa-right"></i>
+                     <span>EAT OUT & SAVE MORE</span>
+                     <p>UP {{$campaign->discount}}{{$campaign->discount_type == 'percent' ? '%' : ''}} OFF</p>
+                     
+                        <a href="{{ route('home.campaigns.show', $campaign->slug) }}">
+                         <img src="{{ uploadedAsset($campaign->banner) }}" alt="">
                         </a>
+                        
+                     <h3>{{ $campaign->title }}</h3>
+                     <div class="category-card-button-section">
+                         <a href="{{ route('home.campaigns.show', $campaign->slug) }}">
+                             <i class="fa-solid fa-right"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @empty
+              
+                @endforelse
 
-                <div class="c-category-card">
+                {{-- <div class="c-category-card">
                     <span>EAT OUT & SAVE MORE</span>
                     <p>UP 30% OFF</p>
                     <img src="{{ asset('public/frontend/default/assets/img/custom_images/2.png') }}" alt="">
@@ -107,7 +127,7 @@
                             <i class="fa-solid fa-right"></i>
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
@@ -176,6 +196,13 @@
         </div>
     @endif --}}
 
-    <div class="gshop-hero-slider-pagination theme-slider-control position-absolute top-50 translate-middle-y z-5">
-    </div>
+        <div class="gshop-hero-slider-pagination theme-slider-control position-absolute top-50 translate-middle-y z-5">
+        </div>
 </section>
+
+
+
+
+
+
+ 

@@ -164,6 +164,7 @@
                             <a href="{{ route('admin.locations.index') }}">{{ localize('All Locations') }}</a>
                         </li>
                     @endcan
+                    
                 </ul>
             </div>
         </li>

@@ -986,10 +986,10 @@
                         </li>
                     @endcan
                     @if (isAdmin())
-                        <li class="{{ areActiveRoutes(['admin.about-update'], 'tt-menu-item-active') }}">
+                        {{-- <li class="{{ areActiveRoutes(['admin.about-update'], 'tt-menu-item-active') }}">
                             <a href="{{ route('admin.about-update') }}"
                                 class="{{ areActiveRoutes(['admin.about-update']) }}">{{ localize('System Update') }}</a>
-                        </li>
+                        </li> --}}
 
                         <li class="{{ areActiveRoutes(['admin.utilities'], 'tt-menu-item-active') }}">
                             <a href="{{ route('admin.utilities') }}"

@@ -22,7 +22,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!--favicon icon-->
-    <link rel="icon" href="{{uploadedAsset(getSetting('navbar_logo'))}}" type="image/png"
+    <link rel="icon" href="{{uploadedAsset(getSetting('favicon'))}}" type="image/png"
         sizes="16x16">
     {{-- <link rel="icon" href="{{ staticAsset('frontend/default/assets/img/favicon.png') }}" type="image/png"
         sizes="16x16"> --}}

@@ -8,7 +8,8 @@
 
     <!--favicon icon-->
     {{-- <link rel="icon" href="{{ uploadedAsset(getSetting('favicon')) }}" type="image/png" sizes="16x16"> --}}
-
+ 
+    
     <link rel="icon" href="{{ uploadedAsset(getSetting('favicon')) }}"  type="image/png" sizes="16x16">
 
     <!--title-->

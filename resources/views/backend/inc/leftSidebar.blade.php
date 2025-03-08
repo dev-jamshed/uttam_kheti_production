@@ -2,11 +2,11 @@
     <div class="tt-brand">
         <a href="{{ auth()->user()->user_type != 'deliveryman' ? route('admin.dashboard') : route('deliveryman.dashboard') }}"
             class="tt-brand-link">
-            <img src="{{ uploadedAsset(getSetting('favicon')) }}" class="tt-brand-favicon  " alt="favicon" />
+            {{-- <img src="{{ uploadedAsset(getSetting('favicon')) }}" class="tt-brand-favicon  " alt="favicon" /> --}}
             <img src="{{ uploadedAsset(getSetting('admin_panel_logo')) }}" class="tt-brand-logo  " alt="logo" />
         </a>
         <a href="javascript:void(0);" class="tt-toggle-sidebar">
-            <span><i data-feather="chevron-left"></i></span>
+            <span><i data-feather="chevron-left"></i></span> 
         </a>
     </div>
 

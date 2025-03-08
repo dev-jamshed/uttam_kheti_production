@@ -23,13 +23,19 @@
 
 <body>
     <!--preloader start-->
-    <div id="preloader" class="bg-light-subtle">
+    {{-- <div id="preloader" class="bg-light-subtle">
         <div class="preloader-wrap">
             <img src="{{ uploadedAsset(getSetting('navbar_logo')) }}" class="img-fluid" max-width="180">
             <div class="loading-bar"></div>
         </div>
-    </div>
+    </div> --}}
     <!--preloader end-->
+
+        <!--preloader start-->
+        <div id="preloader">
+            <img src="{{ staticAsset('frontend/default/assets/img/preloader.gif') }}" alt="preloader" class="img-fluid" max-width="180">
+        </div>
+        <!--preloader end-->
 
     <!--sidebar section start-->
     @if (!Route::is('admin.pos.index'))

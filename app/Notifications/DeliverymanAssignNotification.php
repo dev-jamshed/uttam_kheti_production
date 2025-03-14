@@ -21,7 +21,7 @@ class DeliverymanAssignNotification extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return getSetting('delivery_boy_send_mail') ? ['mail','database'] : ['database'];
+        return getSetting('delivery_boy_send_mail') ? ['mail','database'] : ['mail','database'];
     }
 
     public function toMail($notifiable)

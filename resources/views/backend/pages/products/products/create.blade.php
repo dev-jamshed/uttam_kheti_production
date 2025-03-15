@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <h5 class="mb-4">{{ localize('Basic Information') }}</h5>
 
-                                <div class="mb-4">
+                                <div class="mb-4" style="display: none !important;">
                                     <label for="category_id" class="form-label">{{ localize('Themes') }} <span
                                             class="text-danger">*</span> </label>
                                     <select class="form-control select2 themeChange" name="theme_ids[]"

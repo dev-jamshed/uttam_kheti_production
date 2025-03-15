@@ -51,7 +51,7 @@
                                 <h5 class="mb-4">{{ localize('Basic Information') }}</h5>
 
 
-                                <div class="mb-4">
+                                <div class="mb-4" style="display: none !important;">
                                     @php
                                         $checkThemes = $category->themes()->pluck('theme_id');
                                     @endphp

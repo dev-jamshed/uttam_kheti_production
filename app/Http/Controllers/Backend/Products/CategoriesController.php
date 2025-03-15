@@ -41,10 +41,13 @@ class CategoriesController extends Controller
     # return view of create form
     public function create()
     {
-        $categories = Category::where('parent_id', 0)
-            ->orderBy('sorting_order_level', 'desc')
-            ->with('childrenCategories')
-            ->get();
+        $categories = Category::where(function ($query) {
+            $query->where('parent_id', 0)
+              ->orWhereNull('parent_id');
+        })
+        ->orderBy('sorting_order_level', 'desc')
+        ->with('childrenCategories')
+        ->get();
         $brands = Brand::isActive()->get();
         return view('backend.pages.products.categories.create', compact('categories', 'brands'));
     }
@@ -108,14 +111,17 @@ class CategoriesController extends Controller
         }
 
         $category = Category::findOrFail($id);
-        $categories = Category::where('parent_id', 0)
-            ->where('id', '!=', $category->id)
-            ->orderBy('sorting_order_level', 'desc')
-            ->with('childrenCategories')
-            ->whereNotIn('id', $this->childrenIds($category->id, true))
-            ->where('level', '<=', $category->level)
-            ->orderBy('name', 'asc')
-            ->get();
+        $categories = Category::where(function ($query) use ($category) {
+            $query->where('parent_id', 0)
+              ->orWhereNull('parent_id');
+        })
+        ->where('id', '!=', $category->id)
+        ->orderBy('sorting_order_level', 'desc')
+        ->with('childrenCategories')
+        ->whereNotIn('id', $this->childrenIds($category->id, true))
+        ->where('level', '<=', $category->level)
+        ->orderBy('name', 'asc')
+        ->get();
 
         $brands = Brand::isActive()->get();
         return view('backend.pages.products.categories.edit', compact('category', 'categories', 'brands', 'lang_key'));

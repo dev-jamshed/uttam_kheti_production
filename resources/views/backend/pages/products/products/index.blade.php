@@ -102,7 +102,7 @@
                                     <th data-breakpoints="xs sm">{{ localize('Categories') }}</th>
                                     <th data-breakpoints="xs sm">{{ localize('Price') }}</th>
                                     <th data-breakpoints="xs sm md">{{ localize('Published') }}</th>
-                                    <th data-breakpoints="xs sm md">{{ localize('Themes') }}</th>
+                                    {{-- <th data-breakpoints="xs sm md">{{ localize('Themes') }}</th> --}}
                                     <th data-breakpoints="xs sm md" class="text-end">{{ localize('Action') }}</th>
                                 </tr>
                             </thead>
@@ -160,7 +160,7 @@
                                             @endcan
 
                                         </td>
-                                        <td> {{ $product->themes->pluck('name')}}</td>
+                                        {{-- <td> {{ $product->themes->pluck('name')}}</td> --}}
                                         <td class="text-end">
                                             <div class="dropdown tt-tb-dropdown">
                                                 <button type="button" class="btn p-0" data-bs-toggle="dropdown"

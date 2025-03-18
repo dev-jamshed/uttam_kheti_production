@@ -44,6 +44,7 @@ class ProductsController extends Controller
         $searchKey = null;
         $brand_id = null;
         $is_published = null;
+        $category_id = null;
 
         $products = Product::shop()->latest();
         if ($request->search != null) {
@@ -61,9 +62,17 @@ class ProductsController extends Controller
             $is_published    = $request->is_published;
         }
 
+        if ($request->category_id != null) {
+            $products = $products->whereHas('categories', function ($query) use ($request) {
+                $query->where('category_id', $request->category_id);
+            });
+            $category_id = $request->category_id;
+        }
+
         $brands = Brand::latest()->get();
+        $categories = Category::latest()->get();
         $products = $products->paginate(paginationNumber());
-        return view('backend.pages.products.products.index', compact('products', 'brands', 'searchKey', 'brand_id', 'is_published'));
+        return view('backend.pages.products.products.index', compact('products', 'brands', 'categories', 'searchKey', 'brand_id', 'is_published', 'category_id'));
     }
 
     # return view of create form

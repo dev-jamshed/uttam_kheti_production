@@ -166,7 +166,7 @@
     <div class="container bg-white">
         <div class="gshop-navbar bg-white rounded ps-lg-5 position-relative ">
             <div class="row align-items-center bg-white">
-                
+
                 <div class="col-md-3 col-12">
                     <div class='nav-menu-logo-container'>
 
@@ -275,15 +275,16 @@
                                     @if (getSetting('show_theme_changes') == 0 || !getSetting('show_theme_changes'))
                                         <li><a href="{{ route('home') }}">{{ localize('Home') }}</a></li>
                                     @endif
-                                    
+
                                     <li><a href="{{ route('products.index') }}">{{ localize('Products') }}</a></li>
                                     <li><a href="{{ route('home.campaigns') }}">{{ localize('Campaigns') }}</a>
                                     </li>
                                     <li><a href="{{ route('home.coupons') }}">{{ localize('Coupons') }}</a>
                                     </li>
-                                    <li><a href="{{ route('home.pages.aboutUs') }}">{{ localize('About Us') }}</a></li>
+                                    <li><a href="{{ route('home.pages.aboutUs') }}">{{ localize('About Us') }}</a>
+                                    </li>
                                 @endif
-{{-- 
+                                {{-- 
                                 @if (getSetting('show_navbar_pages') != 0 || getSetting('show_navbar_pages') == null)
                                     <li class="has-submenu">
                                         <a href="javascript:void(0);">{{ localize('Pages') }}<span
@@ -365,16 +366,14 @@
                                                 <li><a href="{{ route('customers.dashboard') }}"><span class="me-2"><i
                                                                 class="fa-solid fa-user"></i></span>{{ localize('My Account') }}</a>
                                                 </li>
-                                                <li><a href="{{ route('customers.orderHistory') }}"><span
-                                                            class="me-2"><i
+                                                <li><a href="{{ route('customers.orderHistory') }}"><span class="me-2"><i
                                                                 class="fa-solid fa-tags"></i></span>{{ localize('My Orders') }}</a>
                                                 </li>
                                                 <li><a href="{{ route('customers.wishlist') }}"><span class="me-2"><i
                                                                 class="fa-solid fa-heart"></i></span>{{ localize('My Wishlist') }}</a>
                                                 </li>
                                             @elseif(auth()->user()->user_type == 'deliveryman')
-                                                <li><a href="{{ route('deliveryman.dashboard') }}"><span
-                                                            class="me-2"><i
+                                                <li><a href="{{ route('deliveryman.dashboard') }}"><span class="me-2"><i
                                                                 class="fa-solid fa-bars"></i></span>{{ localize('Dashboard') }}</a>
                                                 </li>
                                             @else
@@ -428,9 +427,10 @@
                                                 fill="#5D6374" />
                                         </svg>
                                         <span
-                                            class="cart-counter badge bg-primary rounded-circle p-0 {{ count($carts) > 0 ? '' : 'd-none' }}">{{ count($carts) }}</span>       
+                                            class="cart-counter badge bg-primary rounded-circle p-0 {{ count($carts) > 0 ? '' : 'd-none' }}">{{ count($carts) }}</span>
                                     </button>
-                                    <span class="amount-span sub-total-price"> {{ formatPrice(getSubTotal($carts, false)) }} </span> 
+                                    <span class="amount-span sub-total-price">
+                                        {{ formatPrice(getSubTotal($carts, false)) }} </span>
                                 </div>
                                 <div class="cart-box-wrapper">
                                     <div class="apt_cart_box theme-scrollbar">
@@ -489,10 +489,73 @@
 
                     </div>
                 </div>
-
-
             </div>
-        </div>
+
+
+
+
+
+            <div class="row align-items-center bg-white">
+
+                <div class="col-12">
+                    
+            @if (getSetting('show_navbar_categories') != 0 || getSetting('show_navbar_categories') == null)
+
+            <div  class="category_nav" >
+             
+                        @php
+                            $categories = [];
+                            if (getSetting('navbar_categories') != null) {
+                                $categories = \App\Models\Category::whereIn(
+                                    'id',
+                                    json_decode(getSetting('navbar_categories')),
+                                )->get();
+                            }
+                        @endphp
+                        @foreach ($categories as $navbarCat)
+                            
+                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
+                                    class="d-flex align-items-center">
+                                    <div class="me-2 avatar-icon">
+                                        <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
+                                            alt="" class="rounded-circle h-100 w-100">
+                                    </div>
+                                    <span>{{ $navbarCat->collectLocalization('name') }}</span>
+                                </a>
+                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
+                                    class="d-flex align-items-center">
+                                    <div class="me-2 avatar-icon">
+                                        <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
+                                            alt="" class="rounded-circle h-100 w-100">
+                                    </div>
+                                    <span>{{ $navbarCat->collectLocalization('name') }}</span>
+                                </a>
+                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
+                                    class="d-flex align-items-center">
+                                    <div class="me-2 avatar-icon">
+                                        <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
+                                            alt="" class="rounded-circle h-100 w-100">
+                                    </div>
+                                    <span>{{ $navbarCat->collectLocalization('name') }}</span>
+                                </a>
+                            
+                        @endforeach
+
+                    </ul>
+                </div>
+            </div>
+
+        @endif
+
+
+                </div>
+ 
+            </div>
+
+
+
+
+        </div><!-- Container end -->
     </div>
 
 

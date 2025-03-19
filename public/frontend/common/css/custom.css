@@ -794,3 +794,67 @@ html:not([dir="rtl"]) .toast-close-button {
 #quickview_modal .modal-body {
     border-radius: 20px;
 }
+
+
+.category_nav {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #15a73a;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #b2b2b2 #f0f0f0;
+}
+/* Webkit browsers (Chrome, Safari) */
+.category_nav::-webkit-scrollbar {
+    height: 3px; /* Scroll bar thickness */
+}
+
+.category_nav::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Background of scrollbar track */
+    border-radius: 4px;
+}
+
+.category_nav::-webkit-scrollbar-thumb {
+    background: #15a73a; /* Scrollbar color */
+    border-radius: 10px;
+}
+
+.category_nav::-webkit-scrollbar-thumb:hover {
+    background: #11822e; /* Darker shade on hover */
+}
+
+
+
+.category_nav a{
+    font-size: 14px;
+    display:flex;
+    justify-content:center;
+    align-items:center
+}
+
+@media (max-width:768px){
+    .category_nav {
+        gap: 20px;
+        padding-left:20px;
+         border-radius: 10px;
+    } 
+    .category_nav a{
+        font-size:12px;
+        display:flex;
+        justify-content:center;
+        align-items:center
+    }
+     .category_nav img{
+        width:25px !important;
+         height:25px !important;
+         margin-right:0px !important;
+    } 
+    .category_nav  .avatar-icon{
+        margin-right:0px !important;
+    }
+}

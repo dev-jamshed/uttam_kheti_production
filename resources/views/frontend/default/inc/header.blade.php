@@ -522,22 +522,6 @@
                                     </div>
                                     <span>{{ $navbarCat->collectLocalization('name') }}</span>
                                 </a>
-                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
-                                    class="d-flex align-items-center">
-                                    <div class="me-2 avatar-icon">
-                                        <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
-                                            alt="" class="rounded-circle h-100 w-100">
-                                    </div>
-                                    <span>{{ $navbarCat->collectLocalization('name') }}</span>
-                                </a>
-                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
-                                    class="d-flex align-items-center">
-                                    <div class="me-2 avatar-icon">
-                                        <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
-                                            alt="" class="rounded-circle h-100 w-100">
-                                    </div>
-                                    <span>{{ $navbarCat->collectLocalization('name') }}</span>
-                                </a>
                             
                         @endforeach
 

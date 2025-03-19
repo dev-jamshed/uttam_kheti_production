@@ -12,7 +12,7 @@
                     <div class="card tt-page-header">
                         <div class="card-body d-lg-flex align-items-center justify-content-lg-between">
                             <div class="tt-page-title">
-                                <h2 class="h5 mb-lg-0">{{ localize('Featured Products') }}</h2>
+                                <h2 class="h5 mb-lg-0">{{ localize('Our Products') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                         value="{{ getSetting('featured_sub_title') }}">
                                 </div>
 
-                                <div class="mb-4">
+                                <div class="mb-4" style="display: none; !important;">
                                     @php
                                         $featured_products_left = getSetting('featured_products_left') != null ? json_decode(getSetting('featured_products_left')) : [];
                                     @endphp
@@ -57,10 +57,10 @@
                                     @php
                                         $featured_products_right = getSetting('featured_products_right') != null ? json_decode(getSetting('featured_products_right')) : [];
                                     @endphp
-                                    <label class="form-label">{{ localize('Right Column Products') }}</label>
+                                    <label class="form-label">{{ localize('Products') }}</label>
                                     <input type="hidden" name="types[]" value="featured_products_right">
                                     <select class="select2 form-control" multiple="multiple"
-                                        data-placeholder="{{ localize('Select products for right column') }}"
+                                        data-placeholder="{{ localize('Select products ') }}"
                                         name="featured_products_right[]" required>
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}"
@@ -70,7 +70,7 @@
                                     </select>
                                 </div>
 
-                                <div class="mb-4">
+                                <div class="mb-4" style="display: none; !important;">   
                                     <label class="form-label">{{ localize('Center Banner Image') }}</label>
                                     <input type="hidden" name="types[]" value="featured_center_banner">
                                     <div class="tt-image-drop rounded">
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-4">
+                                <div class="mb-4" style="display: none; !important;">
                                     <label for="featured_banner_link"
                                         class="form-label">{{ localize('Banner Link') }}</label>
                                     <input type="hidden" name="types[]" value="featured_banner_link">

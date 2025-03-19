@@ -78,12 +78,12 @@
                                                                     class="me-2"></i>{{ localize('Edit') }}
                                                             </a>
 
-                                                            <a href="#" class="dropdown-item confirm-delete"
+                                                            {{-- <a href="#" class="dropdown-item confirm-delete"
                                                                 data-href="{{ route('admin.appearance.homepage.deleteHero', $slider->id) }}"
                                                                 title="{{ localize('Delete') }}">
                                                                 <i data-feather="trash-2" class="me-2"></i>
                                                                 {{ localize('Delete') }}
-                                                            </a>
+                                                            </a> --}}
                                                         </div>
                                                     </div>
                                                 </td>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('admin.appearance.homepage.storeHero') }}" method="POST"
+                    <form action="{{ route('admin.appearance.homepage.storeHero') }}" method="POST" style="display: none; !important"
                         enctype="multipart/form-data">
                         @csrf
                         <!--slider info start-->

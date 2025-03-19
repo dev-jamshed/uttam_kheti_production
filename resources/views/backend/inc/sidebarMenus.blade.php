@@ -804,10 +804,10 @@
                         </li>
                     @endcan
 
-                    <li class="{{ areActiveRoutes(['admin.appearance.theme'], 'tt-menu-item-active') }}">
+                    {{-- <li class="{{ areActiveRoutes(['admin.appearance.theme'], 'tt-menu-item-active') }}">
                         <a href="{{ route('admin.appearance.theme') }}"
                             class="{{ areActiveRoutes(['admin.appearance.theme']) }}">{{ localize('Themes') }}</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </li>

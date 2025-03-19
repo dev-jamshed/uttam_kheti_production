@@ -24,16 +24,26 @@ class OrderPlacedNotification extends Notification implements ShouldQueue
         return ['mail'];
     }
 
-    public function toMail($notifiable)
+      public function toMail($notifiable)
     {
         $array['subject'] = localize('Your order has been placed') . ' - ' . $this->order->orderGroup->order_code;
         $array['order'] = $this->order;
+        $font_family = env('INVOICE_FONT');
 
-        return (new MailMessage)
-            ->view('backend.pages.orders.invoice', ['order' => $this->order])
+        $mailMessage = (new MailMessage)
+            ->view('backend.pages.orders.invoice', ['order' => $this->order, 'font_family' => $font_family])
             ->from(env('MAIL_FROM_ADDRESS'))
             ->subject(localize('Order Placed') . ' - ' . env('APP_NAME'));
+
+        // Add admin emails to CC
+        $adminEmails = \App\Models\User::where('user_type', 'admin')->pluck('email')->toArray();
+        if (!empty($adminEmails)) {
+            $mailMessage->cc($adminEmails);
+        }
+
+        return $mailMessage;
     }
+
 
     public function toArray($notifiable)
     {

@@ -52,6 +52,21 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="input-group">
+                                            <select class="form-select select2" name="category_id">
+                                                <option value="">{{ localize('Select Category') }}</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        @isset($category_id)
+                                                            @if ($category_id == $category->id) selected @endif
+                                                        @endisset>
+                                                        {{ $category->collectLocalization('name') }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-auto">
+                                        <div class="input-group">
                                             <select class="form-select select2" name="brand_id">
                                                 <option value="">{{ localize('Select Brand') }}</option>
                                                 @foreach ($brands as $brand)
@@ -102,7 +117,7 @@
                                     <th data-breakpoints="xs sm">{{ localize('Categories') }}</th>
                                     <th data-breakpoints="xs sm">{{ localize('Price') }}</th>
                                     <th data-breakpoints="xs sm md">{{ localize('Published') }}</th>
-                                    <th data-breakpoints="xs sm md">{{ localize('Themes') }}</th>
+                                    {{-- <th data-breakpoints="xs sm md">{{ localize('Themes') }}</th> --}}
                                     <th data-breakpoints="xs sm md" class="text-end">{{ localize('Action') }}</th>
                                 </tr>
                             </thead>
@@ -160,7 +175,7 @@
                                             @endcan
 
                                         </td>
-                                        <td> {{ $product->themes->pluck('name')}}</td>
+                                        {{-- <td> {{ $product->themes->pluck('name')}}</td> --}}
                                         <td class="text-end">
                                             <div class="dropdown tt-tb-dropdown">
                                                 <button type="button" class="btn p-0" data-bs-toggle="dropdown"
@@ -171,7 +186,8 @@
                                                     @can('edit_products')
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.products.edit', ['id' => $product->id, 'lang_key' => env('DEFAULT_LANGUAGE')]) }}&localize">
-                                                            <i data-feather="edit-3" class="me-2"></i>{{ localize('Edit') }}
+                                                            <i data-feather="edit-3"
+                                                                class="me-2"></i>{{ localize('Edit') }}
                                                         </a>
                                                     @endcan
 
@@ -191,7 +207,7 @@
                                                         </a>
                                                     @endcan
 
-                                                    
+
                                                 </div>
                                             </div>
                                         </td>
@@ -221,9 +237,9 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        
-                            <h5 class="modal-title">{{ localize('Import Products') }}</h5>
-                            
+
+                        <h5 class="modal-title">{{ localize('Import Products') }}</h5>
+
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -231,10 +247,11 @@
                     <div class="modal-body">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-between mb-3 align-items-center">
-                            <label for="import" class="h6 mb-0">{{ localize('Import File') }}</label>
-                            <a href="{{asset('public/sample_product.xlsx')}}" douwnload class="btn btn-sm rounded-pill btn-secondary py-1 px-2 fs-ms"><i
-                                data-feather="download"></i> {{ localize('Sample File') }}</a>
-                        </div>
+                                <label for="import" class="h6 mb-0">{{ localize('Import File') }}</label>
+                                <a href="{{ asset('public/sample_product.xlsx') }}" douwnload
+                                    class="btn btn-sm rounded-pill btn-secondary py-1 px-2 fs-ms"><i
+                                        data-feather="download"></i> {{ localize('Sample File') }}</a>
+                            </div>
 
                             <input type="file" id="import" name="file" class="form-control">
                         </div>
@@ -256,7 +273,7 @@
 
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                toastr.warning("{{$error}}")
+                toastr.warning("{{ $error }}")
             @endforeach
         @endif
 

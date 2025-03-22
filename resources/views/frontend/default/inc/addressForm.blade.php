@@ -14,10 +14,11 @@
                                     <div class="w-100 label-input-field">
                                         <label>{{ localize('Country') }}</label>
                                         <select class="select2Address" name="country_id" required>
-                                            <option value="">{{ localize('Select Country') }}</option>
-                                            @foreach ($countries as $country)
+                                            <option selected value="166">Pakistan</option>
+                                            {{-- <option value="">{{ localize('Select Country') }}</option> --}}
+                                            {{-- @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -196,6 +197,10 @@
             let city_id = $("input[name='shipping_address_id']:checked").data('city_id');
             getLogistics(city_id);
         }
+
+
+        getStates(166);
+        
     });
 
     //  new address
@@ -226,6 +231,8 @@
         var country_id = $(this).val();
         getStates(country_id);
     });
+        
+
 
     //  get states
     function getStates(country_id) {

@@ -76,6 +76,12 @@
                                         value="{{ $category->collectLocalization('name') }}">
                                 </div>
 
+                                <div class="mb-4">
+                                    <label for="slug" class="form-label">{{ localize('Category Slug') }}</label>
+                                    <input class="form-control" type="text" id="slug"
+                                        placeholder="{{ localize('Type your category slug') }}" name="slug"
+                                        value="{{ $category->slug }}">
+                                </div>
 
                                 <div class="mb-4">
                                     <label for="description"
@@ -263,6 +269,13 @@
         $(document).ready(function() {
             getChosenFilesCount();
             showSelectedFilePreviewOnLoad();
+        });
+
+        // Restrict slug format
+        $('#slug').on('input', function() {
+            let value = $(this).val();
+            value = value.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+            $(this).val(value);
         });
     </script>
 @endsection

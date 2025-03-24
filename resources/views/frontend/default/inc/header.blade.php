@@ -206,7 +206,7 @@
                                         @endphp
                                         @foreach ($categories as $navbarCat)
                                             <li>
-                                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
+                                                <a href="{{ route('products.index') }}?category_id={{ $navbarCat->id }}&slug={{ $navbarCat->slug }}"
                                                     class="d-flex align-items-center">
                                                     <div class="me-2 avatar-icon">
                                                         <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"
@@ -514,7 +514,7 @@
                         @endphp
                         @foreach ($categories as $navbarCat)
                             
-                                <a href="{{ route('products.index') }}?&category_id={{ $navbarCat->id }}"
+                                <a href="{{ route('products.index') }}?category_id={{ $navbarCat->id }}&slug={{ $navbarCat->slug }}"
                                     class="d-flex align-items-center">
                                     <div class="me-2 avatar-icon">
                                         <img src="{{ uploadedAsset($navbarCat->collectLocalization('thumbnail_image')) }}"

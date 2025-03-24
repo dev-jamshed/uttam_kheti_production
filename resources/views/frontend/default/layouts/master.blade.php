@@ -89,6 +89,28 @@
   
     <link rel="stylesheet" href="{{ staticAsset('frontend\common\css\responsive.css') }}">
  
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Store",
+          "name": "Uttam Kheti",
+          "url": "https://uttamkheti.store/",
+          "logo": "{{ uploadedAsset(getSetting('navbar_logo')) }}",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "{{ getSetting('navbar_contact_number') }}",
+            "contactType": "customer service",
+            "areaServed": "PK",
+            "availableLanguage": ["en", "ur"]
+          },
+          "sameAs": [
+            "https://www.facebook.com/uttamkheti.pk",
+            "https://www.instagram.com/uttamkheti.pk"
+            ]
+        }
+    </script>
+
+
 </head>
 
 <body>

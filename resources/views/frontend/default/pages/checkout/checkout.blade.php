@@ -43,7 +43,7 @@
                                         <div class="tt-address-content">
                                             <input type="radio" class="tt-custom-radio" name="shipping_address_id"
                                                 id="shipping-{{ $address->id }}" value="{{ $address->id }}"
-                                                onchange="getLogistics({{ $address->area_id }})"
+                                                onchange="getLogistics({{ $address->area_id }},{{ $address->id }})"
                                                 @if ($address->is_default) checked @endif
                                                 data-city_id="{{ $address->city_id }}">
 
@@ -75,9 +75,9 @@
                             <!-- checkout-logistics -->
                             <div class="checkout-logistics"></div>
                             <!-- checkout-logistics -->
-
+                            <input type="text" name="billing_address_id" id="billing_address_id" hidden>
                             <!-- billing address -->
-                            @if (count($addresses) > 0)
+                            {{-- @if (count($addresses) > 0)
                                 <h4 class="mb-3 mt-7">{{ localize('Billing Address') }}</h4>
                                 <div class="row g-4">
                                     @foreach ($addresses as $address)
@@ -102,12 +102,12 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            @endif
+                            @endif --}}
                             <!-- billing address -->
 
                             <!-- Delivery Time -->
-                            <h4 class="mt-7 mb-3">{{ localize('Preferred Delivery Time') }}</h4>
-                            <div class="row g-4">
+                            <h4 style="display: none" class="mt-7 mb-3">{{ localize('Preferred Delivery Time') }}</h4>
+                            <div style="display: none" class="row g-4">
                                 <div class="col-12">
                                     <div class="tt-address-content">
                                         <input type="radio" class="tt-custom-radio" name="shipping_delivery_type"

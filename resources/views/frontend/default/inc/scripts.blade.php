@@ -400,7 +400,10 @@
     }
 
     // get logistics to check out
-    function getLogistics(city_id) {
+    function getLogistics(city_id, address_id) {
+
+        document.getElementById('billing_address_id').value = address_id;
+
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -415,6 +418,12 @@
                 $('.checkout-logistics').empty();
                 $('.checkout-logistics').html(data.logistics);
                 $('.checkout-sidebar').html(data.summary);
+                $(document).ready(function() {
+                    var firstCheckedRadio = $('[name=chosen_logistic_zone_id]:checked');
+                    if (firstCheckedRadio.length > 0) {
+                        firstCheckedRadio.trigger('change');
+                    }
+                });
             }
         });
     }
@@ -460,11 +469,11 @@
         }
 
         // billing address not selected
-        if ($('.checkout-form input[name=billing_address_id]:checked').length == 0) {
-            notifyMe('error', '{{ localize('Please select billing address') }}');
-            e.preventDefault();;
-            return false;
-        }
+        // if ($('.checkout-form input[name=billing_address_id]:checked').length == 0) {
+        //     notifyMe('error', '{{ localize('Please select billing address') }}');
+        //     e.preventDefault();;
+        //     return false;
+        // }
     });
 
     // add to wishlist

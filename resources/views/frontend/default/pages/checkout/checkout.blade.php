@@ -43,9 +43,11 @@
                                         <div class="tt-address-content">
                                             <input type="radio" class="tt-custom-radio" name="shipping_address_id"
                                                 id="shipping-{{ $address->id }}" value="{{ $address->id }}"
-                                                onchange="getLogistics({{ $address->area_id }},{{ $address->id }})"
+                                                onchange="getLogistics({{ $address->area_id }})"
                                                 @if ($address->is_default) checked @endif
-                                                data-city_id="{{ $address->city_id }}">
+                                                data-city_id="{{ $address->city_id }}"
+                                                data-area_id="{{ $address->area_id }}">
+
 
                                             <label for="shipping-{{ $address->id }}"
                                                 class="tt-address-info bg-white rounded p-4 position-relative">
@@ -162,7 +164,10 @@
                                                         </select>
 
                                                         @php
-                                                            $timeSlots = \App\Models\ScheduledDeliveryTimeList::orderBy('sorting_order', 'ASC')->get();
+                                                            $timeSlots = \App\Models\ScheduledDeliveryTimeList::orderBy(
+                                                                'sorting_order',
+                                                                'ASC',
+                                                            )->get();
                                                         @endphp
 
                                                         <select class="form-select py-1" name="timeslot">
@@ -241,4 +246,35 @@
     <!--add address modal start-->
     @include('frontend.default.inc.addressForm', ['countries' => $countries])
     <!--add address modal end-->
+    <script>
+        document.querySelector('.checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const selectedShipping = document.querySelector('input[name="shipping_address_id"]:checked');
+            const shippingAddressId = selectedShipping.value;
+            const areaId = selectedShipping.getAttribute('data-area_id');
+
+            // Fetch the minimum order price for the selected address via AJAX
+            fetch(`{{ route('checkout.getMinimumOrderPrice') }}?area=${areaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const cartTotalText = document.querySelector('#subTotal').innerText;
+                    const cartTotal = parseFloat(cartTotalText.replace(/[^0-9.-]+/g, ""));
+                    console.log(cartTotal, data.minimum_order_price);
+
+
+                    if (cartTotal <= data.minimum_order_price) {
+                        notifyMe('danger',
+                           `Minimum order amount is ${data.minimum_order_price}.`
+                            );
+                    } else {
+                        e.target.submit();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching minimum order price:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        });
+    </script>
 @endsection

@@ -36,6 +36,15 @@
                                 </div>
 
                                 <div class="mb-4">
+                                    <label for="minimum_order_price" class="form-label">
+                                        {{ localize('Minimum Order Price') }} 
+                                        <small>(This field is used to set the minimum order price for the area)</small>
+                                    </label>minimum_order_price
+                                    <input class="form-control" type="number" id=""
+                                        placeholder="{{ localize('Enter minimum order price') }}" name="minimum_order_price" required>
+                                </div>
+                                
+                                <div class="mb-4">
                                     <label for="city_id" class="form-label">{{ localize('City') }}</label>
                                     <select class="form-control select2" name="city_id" class="w-100"
                                         data-toggle="select2" required>

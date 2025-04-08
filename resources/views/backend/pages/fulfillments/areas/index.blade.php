@@ -82,6 +82,7 @@
                                     <th class="text-center">{{ localize('S/L') }}</th>
                                     <th>{{ localize('Name') }}</th>
                                     <th>{{ localize('City') }}</th>
+                                    <th>{{ localize('Minimum Order Price') }}</th>
                                     <th data-breakpoints="xs sm">{{ localize('Active') }}</th>
                                     <th data-breakpoints="xs sm" class="text-end">{{ localize('Action') }}</th>
                                 </tr>
@@ -99,6 +100,10 @@
 
                                         <td class="fw-semibold">
                                             {{ $area->city->name }}
+                                        </td>
+
+                                        <td class="fw-semibold">
+                                            {{ $area->minimum_order_price }}
                                         </td>
                                         
                                         <td>
@@ -126,6 +131,7 @@
                                                             <i data-feather="edit-3" class="me-2"></i>{{ localize('Edit') }}
                                                         </a>
                                                     @endcan
+                                                    
                                                 </div>
                                             </div>
                                         </td>

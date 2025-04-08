@@ -58,6 +58,7 @@ class AreasController extends Controller
         $area = new Area;
         $area->name      = $request->name;
         $area->city_id   = $request->city_id;
+        $area->minimum_order_price   = $request->minimum_order_price;
         $area->is_active = 1;
         $area->save();
         flash(localize('Area has been inserted successfully'))->success();
@@ -78,6 +79,8 @@ class AreasController extends Controller
         $area = Area::findOrFail((int) $request->id);
         $area->name    = $request->name;
         $area->city_id = $request->city_id;
+        $area->minimum_order_price   = $request->minimum_order_price;
+        $area->is_active =  $request->is_active;
         $area->save();
         flash(localize('Area has been updated successfully'))->success();
         return back();

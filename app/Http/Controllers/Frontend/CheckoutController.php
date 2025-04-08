@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Area;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Coupon;
@@ -14,16 +15,16 @@ use App\Models\RewardPoint;
 use App\Models\LogisticZone;
 use Illuminate\Http\Request;
 use App\Models\LogisticZoneArea;
-use App\Models\LogisticZoneCity;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
-use App\Models\ScheduledDeliveryTimeList;
 
+use App\Models\ScheduledDeliveryTimeList;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrderPlacedNotification;
+use Modules\PaymentGateway\Entities\PaymentGateway;
 use App\Http\Controllers\Backend\Payments\PaymentsController;
 
 class CheckoutController extends Controller
@@ -32,6 +33,7 @@ class CheckoutController extends Controller
     public function index()
     {
         $carts = Cart::where('user_id', auth()->user()->id)->where('location_id', session('stock_location_id'))->get();
+       
 
         if (count($carts) > 0) {
             checkCouponValidityForCheckout($carts);
@@ -42,7 +44,7 @@ class CheckoutController extends Controller
 
         $countries = Country::isActive()->get();
         $activeGateways = null;
-        if(isModuleActive('PaymentGateway')) {
+        if (isModuleActive('PaymentGateway')) {
             $activeGateways = \Modules\PaymentGateway\Entities\PaymentGateway::where('is_active', 1)->where('gateway', '!=', 'Cash_on_Delivery')->isActive()->get();
         }
         return view('frontend.default.pages.checkout.checkout', [
@@ -62,14 +64,14 @@ class CheckoutController extends Controller
             DB::enableQueryLog();
             $logisticZoneAreas = LogisticZoneArea::with("logistic")->where('area_id', $request->area_id)->get();
             Log::info(DB::getQueryLog());
-    
+
             // Check if the relationship data is loaded
             Log::info($logisticZoneAreas);
-    
+
             if ($logisticZoneAreas->isEmpty()) {
                 return response()->json(['message' => 'No logistics available for the selected area'], 404);
             }
-    
+
             return [
                 'logistics' => getRender('inc.logistics', ['logisticZoneAreas' => $logisticZoneAreas]),
                 'summary'   => getRender('pages.partials.checkout.orderSummary', ['carts' => Cart::where('user_id', auth()->user()->id)->where('location_id', session('stock_location_id'))->get()])
@@ -313,12 +315,11 @@ class CheckoutController extends Controller
                 DB::commit();
                 flash(localize('Your order has been placed successfully'))->success();
                 return redirect()->route('checkout.success', $orderGroup->order_code);
-                
             }
 
             DB::commit();
         } catch (\Throwable $th) {
-           Log::info('checkout issue :'. $th->getMessage());
+            Log::info('checkout issue :' . $th->getMessage());
             DB::rollBack();
             flash($th->getMessage())->error();
             return back();
@@ -369,5 +370,21 @@ class CheckoutController extends Controller
         clearOrderSession();
         flash(localize('Your order has been placed successfully'))->success();
         return redirect()->route('checkout.success', $orderGroup->order_code);
+    }
+
+    public function getMinimumOrderPrice(Request $request)
+    {
+        $areaId = $request->area;
+
+
+
+
+        $area = Area::find($areaId);
+
+        if ($area) {
+            return response()->json(['minimum_order_price' => $area->minimum_order_price, 'area' => $area]);
+        } else {
+            return response()->json(['minimum_order_price' => 0, 'area' => $area]);
+        }
     }
 }

@@ -6,7 +6,7 @@
     <table class="sidebar-table w-100 mt-5">
         <tr>
             <td>(+) {{ localize('Items') }}({{ count($carts) }}):</td>
-            <td class="text-end">{{ formatPrice(getSubTotal($carts, false, '', false)) }}</td>
+            <td id="subTotal" class="text-end">{{ formatPrice(getSubTotal($carts, false, '', false)) }}</td>
         </tr>
 
         <tr>

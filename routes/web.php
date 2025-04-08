@@ -135,6 +135,7 @@ Route::group(['prefix' => '', 'middleware' => ['customer', 'verified', 'isBanned
     Route::post('/checkout-complete', [CheckoutController::class, 'complete'])->name('checkout.complete');
     Route::get('/orders/invoice/{code}', [CheckoutController::class, 'invoice'])->name('checkout.invoice');
     Route::get('/orders/{code}/invoice', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('/get-minimum-order-price', [CheckoutController::class, 'getMinimumOrderPrice'])->name('checkout.getMinimumOrderPrice');
 
     # address
     Route::post('/new-address', [AddressController::class, 'store'])->name('address.store');

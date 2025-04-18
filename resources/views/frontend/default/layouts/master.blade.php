@@ -110,7 +110,7 @@
         }
     </script>
 
-
+   
 </head>
 
 <body>
@@ -212,6 +212,7 @@
             //     });
             // }
         </script>
+        {{-- //farhan commit --}}
         <!--for pwa-->
 
         </body>

@@ -212,7 +212,6 @@
             //     });
             // }
         </script>
-        {{-- //farhan commit --}}
         <!--for pwa-->
 
         </body>

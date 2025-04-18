@@ -54,7 +54,7 @@
                                 </div>
 
 
-                                @can('assign_deliveryman')
+                                @can('manage_orders') 
 
                                 <div class="col-auto col-lg-3">
                                     <label class="form-label">{{ localize('Assign Deliveryman') }}</label>

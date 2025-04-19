@@ -89,7 +89,7 @@ class OrdersController extends Controller
     public function show($id)
     {
         $order = Order::findOrFail($id);
-        $deliverymen = User::where('is_active', 1)->where('user_type', 'deliveryman')->where('location_id', $order->orderGroup->location_id)->latest()->get();
+            $deliverymen = User::where('is_active', 1)->where('user_type', 'deliveryman')->latest()->get();
         return view('backend.pages.orders.show', compact('order', 'deliverymen'));
     }
 

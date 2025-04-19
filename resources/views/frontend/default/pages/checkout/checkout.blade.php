@@ -106,6 +106,19 @@
                                 </div>
                             @endif --}}
                             <!-- billing address -->
+                            <div id="locationConfirmationModal" style="display: none;">
+                                <div class="modal-content">
+                                    <h3>Location Permission Required</h3>
+                                    <p>We will use your current location to ensure the rider can reach your accurate
+                                        location. Would you like to share your location?</p>
+                                    <button id="locationConfirmBtn">Yes, Share Location</button>
+                                    <button id="locationDenyBtn">No, I Don't Want to Share</button>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="latitude" id="latitude">
+                            <input type="hidden" name="longitude" id="longitude">
+
 
                             <!-- Delivery Time -->
                             <h4 style="display: none" class="mt-7 mb-3">{{ localize('Preferred Delivery Time') }}</h4>
@@ -247,6 +260,72 @@
     @include('frontend.default.inc.addressForm', ['countries' => $countries])
     <!--add address modal end-->
     <script>
+        function getLocation(e) {
+            const selectedShipping = document.querySelector('input[name="shipping_address_id"]:checked');
+            const shippingAddressId = selectedShipping.value;
+            const areaId = selectedShipping.getAttribute('data-area_id');
+
+            // Fetch the minimum order price for the selected address via AJAX
+            fetch(`{{ route('checkout.getMinimumOrderPrice') }}?area=${areaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const cartTotalText = document.querySelector('#subTotal').innerText;
+                    const cartTotal = parseFloat(cartTotalText.replace(/[^0-9.-]+/g, ""));
+                    console.log(cartTotal, data.minimum_order_price);
+
+                    if (cartTotal <= data.minimum_order_price) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Order Not Sufficient',
+                            text: `Minimum order amount is ${data.minimum_order_price}. Please add more items to your cart.`
+                        });
+                    } else {
+                        // Use SweetAlert for location confirmation
+                        Swal.fire({
+                            title: 'Location Permission',
+                            text: 'We need to access your location to ensure the rider reaches you accurately. Do you want to share your location?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, Share Location',
+                            cancelButtonText: 'No, I Don\'t Want to Share'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(function(position) {
+                                        document.getElementById('latitude').value = position.coords
+                                            .latitude;
+                                        document.getElementById('longitude').value = position.coords
+                                            .longitude;
+
+                                        console.log(position.coords.latitude, position.coords
+                                            .longitude);
+
+                                        // ab yahan form submit karo jab values mil jaen
+                                        e.target.submit();
+                                    }, function(error) {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Location Access Blocked',
+                                            text: 'Your location access has been blocked.'
+                                        });
+                                    });
+                                }
+                            } else {
+                                // agar user ne location share nahi ki to bhi form submit kardo
+                                e.target.submit();
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching minimum order price:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while fetching the minimum order price. Please try again.'
+                    });
+                });
+        }
         document.querySelector('.checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -265,10 +344,10 @@
 
                     if (cartTotal <= data.minimum_order_price) {
                         notifyMe('danger',
-                           `Minimum order amount is ${data.minimum_order_price}.`
-                            );
+                            `Minimum order amount is ${data.minimum_order_price}.`
+                        );
                     } else {
-                        e.target.submit();
+                        getLocation(e);
                     }
                 })
                 .catch(error => {
@@ -277,4 +356,6 @@
                 });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endsection

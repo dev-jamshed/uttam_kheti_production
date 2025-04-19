@@ -102,10 +102,18 @@
                                                     {{ optional(optional($shippingAddress)->city)->name }},
                                                     {{ optional(optional($shippingAddress)->state)->name }},
                                                     {{ optional(optional($shippingAddress)->country)->name }}
-                                                @endif
+                                            @endif
                                             </p>
+                                            @if ($order->latitude && $order->longitude)
+                                            <p class="mb-0">
+                                                <a href="https://www.google.com/maps?q={{ $order->latitude }},{{ $order->longitude }}"
+                                                    target="_blank">
+                                                     View Location on Google Maps
+                                                </a>
+                                            </p>
+                                        @endif
                                         </div>
-                                        @if (!$order->orderGroup->is_pos_order)
+                                        {{-- @if (!$order->orderGroup->is_pos_order)
                                             <div class="ms-4">
                                                 <h6 class="mb-2">{{ localize('Billing Address') }}</h6>
                                                 @php
@@ -120,7 +128,7 @@
                                                     {{ optional(optional($billingAddress)->country)->name }}
                                                 </p>
                                             </div>
-                                        @endif
+                                        @endif --}}
 
                                     </div>
                                 </div>

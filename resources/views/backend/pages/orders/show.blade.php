@@ -54,26 +54,24 @@
                                 </div>
 
 
-                                @can('manage_orders') 
-
-                                <div class="col-auto col-lg-3">
-                                    <label class="form-label">{{ localize('Assign Deliveryman') }}</label>
-                                    <div class="input-group">
-                                        <select class="form-select select2" name="assign_deliveryman"
-                                            data-minimum-results-for-search="Infinity" id="assign_deliveryman"
-                                            @if ($order->delivery_status == orderDeliveredStatus() || $order->delivery_status == orderCancelledStatus()) disabled @endif>
-                                            <option value="">
-                                                {{ localize('Assign Deliveryman') }}
-                                            </option>
-                                            @foreach ($deliverymen as $deliveryman)
-                                                <option value="{{ $deliveryman->id }}"
-                                                    @if ($order->deliveryman_id == $deliveryman->id) selected @endif>
-                                                    {{ $deliveryman->name }}</option>
-                                            @endforeach
-                                        </select>
+                                @can('manage_orders')
+                                    <div class="col-auto col-lg-3">
+                                        <label class="form-label">{{ localize('Assign Deliveryman') }}</label>
+                                        <div class="input-group">
+                                            <select class="form-select select2" name="assign_deliveryman"
+                                                data-minimum-results-for-search="Infinity" id="assign_deliveryman"
+                                                @if ($order->delivery_status == orderDeliveredStatus() || $order->delivery_status == orderCancelledStatus()) disabled @endif>
+                                                <option value="">
+                                                    {{ localize('Assign Deliveryman') }}
+                                                </option>
+                                                @foreach ($deliverymen as $deliveryman)
+                                                    <option value="{{ $deliveryman->id }}"
+                                                        @if ($order->deliveryman_id == $deliveryman->id) selected @endif>
+                                                        {{ $deliveryman->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-
                                 @endcan
 
                                 <div class="col-auto col-lg-3">
@@ -131,6 +129,7 @@
                                         <p class="mb-0">{{ localize('Name') }}: {{ optional($order->user)->name }}</p>
                                         <p class="mb-0">{{ localize('Email') }}: {{ optional($order->user)->email }}</p>
                                         <p class="mb-0">{{ localize('Phone') }}: {{ optional($order->user)->phone }}</p>
+                                      
 
                                         @php
                                             $deliveryInfo = json_decode($order->scheduled_delivery_info);
@@ -166,9 +165,18 @@
                                                     {{ optional(optional($shippingAddress)->state)->name }},
                                                     {{ optional(optional($shippingAddress)->country)->name }}
                                                 @endif
+                                                @if ($order->latitude && $order->longitude)
+                                                <p class="mb-0">
+                                                    <a href="https://www.google.com/maps?q={{ $order->latitude }},{{ $order->longitude }}"
+                                                        target="_blank">
+                                                         View Location on Google Maps
+                                                    </a>
+                                                </p>
+                                            @endif
                                             </p>
                                         </div>
-                                        @if (!$order->orderGroup->is_pos_order)
+                                        
+                                        {{-- @if (!$order->orderGroup->is_pos_order)
                                             <div class="ms-4">
                                                 <h6 class="mb-2">{{ localize('Billing Address') }}</h6>
                                                 @php
@@ -183,7 +191,7 @@
                                                     {{ optional(optional($billingAddress)->country)->name }}
                                                 </p>
                                             </div>
-                                        @endif
+                                        @endif --}}
 
                                     </div>
                                 </div>
@@ -206,8 +214,6 @@
                                 @foreach ($order->orderItems as $key => $item)
                                     @php
                                         $product = $item->product_variation->productWithTrashed;
-
-                                     
 
                                     @endphp
                                     <tr>

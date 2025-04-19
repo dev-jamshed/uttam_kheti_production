@@ -104,6 +104,7 @@ class CheckoutController extends Controller
     public function complete(Request $request)
     {
 
+        info($request->all());
         $user = auth()->user();
         $userId = $user->id;
         $carts  = Cart::where('user_id', $userId)->where('location_id', session('stock_location_id'))->get();
@@ -186,6 +187,8 @@ class CheckoutController extends Controller
                 # order -> todo::[update version] make array for each vendor, create order in loop
                 $order = new Order;
                 $order->order_group_id  = $orderGroup->id;
+                $order->latitude       = $request->latitude;
+                $order->longitude      = $request->longitude;
                 $order->shop_id         = $carts[0]->product_variation->product->shop_id;
                 $order->user_id         = $userId;
                 $order->location_id     = session('stock_location_id');
